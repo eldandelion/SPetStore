@@ -1,0 +1,94 @@
+
+
+html, body {
+    height: 100%;
+    height: -webkit-fill-available;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+#container-footer {
+    width: 100%;
+    margin-top: auto;
+
+
+
+}
+
+body {
+    height: 100%;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    padding-top: 60px;
+    overflow-x: hidden;
+
+
+}
+
+body.locked {
+    overflow: hidden;
+}
+
+#container-content {
+    height: 560px ;
+
+}
+
+
+
+#container-element {
+
+    height: 560px ;
+    background-color: #fff8f4 !important;
+    border-radius: 29px;
+    border: 1px solid #9d8e81;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) !important;
+
+}
+#image-holder {
+
+    padding: 16px !important;
+
+    border-radius: 36px !important;
+}
+
+#col-description {
+    padding: 16px 24px 10px 14px !important;
+
+}
+
+#text-item-name {
+    color: #875200 !important;
+}
+
+.container-details {
+    padding-bottom: 8px ;
+}
+
+.flex-grow-1 {
+    flex-grow: 2;
+}
+
+#badge-price, #badge-instock {
+    background-color: #482a00 !important;
+
+}
+
+#buttonPurchase {
+    background: linear-gradient(to right, #ffb865, #ff9e26);
+    --bs-btn-border-color: #ffb865;
+    --bs-btn-hover-bg: #ffe1cb !important;
+    --bs-btn-hover-border-color: #ffe1cb !important;
+    transition: background 2s ease !important;
+}
+
+#buttonPurchase:hover {
+    background: linear-gradient(to right, #ffe1cb, #ffb865) !important;
+    transition: background 2s ease !important;
+}
+

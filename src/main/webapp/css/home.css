@@ -1,0 +1,199 @@
+
+
+html {
+    height: 100%;
+    height: -webkit-fill-available;
+}
+
+* {
+    scroll-behavior: smooth;
+}
+
+#button-home, #button-cart, #button-search {
+    background-color: #ffffff;
+}
+
+
+
+body {
+    height: 100%;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    padding-top: 60px;
+    overflow-x: hidden;
+
+}
+
+body.locked {
+    overflow: hidden;
+}
+
+
+
+.navbar {
+    border-bottom: 1px solid #9d8e81;
+
+    background-color: rgba(255, 248, 244, 0.7) !important;
+}
+
+#shape-one {
+    height: 160px;
+    width: 56px;
+    background-color: #ffe1cb;
+    position: absolute;
+    bottom: 0px;
+    left: 50px;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+
+}
+
+#shape-two {
+
+    height: 350px;
+    width: 70px;
+    background-color: #bcdbe5;
+    position: absolute;
+    top: 0px;
+    left: 130px;
+    border-bottom-left-radius: 34px;
+    border-bottom-right-radius: 34px;
+
+}
+
+#shape-three {
+
+    height: 330px;
+    width: 220px;
+    background-color: #ffd6d1;
+    position: absolute;
+    top: 310px;
+    left: 250px;
+
+    border-radius: 120px;
+
+}
+
+#shape-four {
+
+    height: 300px;
+    width: 220px;
+    background-color: #ffe1cb;
+    position: absolute;
+    top: 360px;
+    left: 44%;
+
+    border-radius: 120px;
+
+}
+
+
+.btn {
+    --bs-btn-hover-bg: #ffb865 !important;
+    --bs-btn-hover-border-color: #ffb865 !important;
+}
+
+
+
+
+#button-explore {
+
+    --bs-btn-border-color: #ffb865 !important;
+    --bs-btn-bg: #ffb865;
+    width: 130px;
+    height: 46px;
+}
+
+.align-bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+
+}
+
+
+#shape-five {
+    height: 300px;
+    width: 30px;
+    background-color: #bcdbe5;
+    position: absolute;
+    bottom: 0px;
+    left: 37%;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+
+}
+
+#image-cat {
+    height: 360px;
+    width: 360px;
+    position: absolute;
+    top: 310px;
+    left: 160px;
+
+
+
+}
+
+#shape-six {
+
+    height: 300px;
+    width: 220px;
+    background-color: #bcdbe5;
+    position: absolute;
+    top: 330px;
+    left: 70%;
+
+    border-radius: 120px;
+
+}
+
+#image-fish {
+    height: 350px;
+    width: 350px;
+    position: absolute;
+    top: 360px;
+    left: 40%;
+
+}
+
+#image-dog {
+    height: 340px;
+    width: 340px;
+    position: absolute;
+    top: 320px;
+    left: 68%;
+
+}
+
+#shape-seven {
+
+    height: 370px;
+    width: 36px;
+    background-color: #bcdbe5;
+    position: absolute;
+    top: 100px;
+    left: 90%;
+
+    border-radius: 120px;
+
+}
+
+#button-search:hover, #button-home:hover, #button-cart:hover {
+    background-color: #ffb865;
+}
+
+#shape-eight {
+
+    height: 370px;
+    width: 36px;
+    background-color: #c4eecc;
+    position: absolute;
+    top: 240px;
+    left: 94%;
+
+    border-radius: 120px;
+
+}
+

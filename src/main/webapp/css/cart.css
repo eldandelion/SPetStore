@@ -1,0 +1,96 @@
+
+
+#container-cart{
+    margin-top: 60px !important;
+
+
+    background-color: #fff8f4 !important;
+    border-radius: 42px;
+    margin-bottom: 60px;
+    border: 1px solid #9d8e81;
+
+}
+#text-your-cart {
+}
+
+#badge-counter {
+    background-color: #ffffff !important;
+    color: #ffb865 !important;
+    font-size: 24px !important;
+}
+
+.pagination {
+    --bs-pagination-color: #2e2c25 !important;
+}
+
+#table-cart {
+    border-radius: 12px;
+}
+
+#button-store {
+    background-color: #ffffff;
+}
+
+#buttonSubmit, #loginButton {
+    margin-bottom: 60px;
+    --bs-btn-bg:  #ffb865;
+    --bs-btn-border-color:  #ffb865;
+    --bs-btn-hover-bg: #ffe1cb !important;
+    --bs-btn-hover-border-color: #ffe1cb !important;
+}
+
+#container-items-list {
+
+    background-color: #fff8f4 !important;
+    border-radius: 16px;
+   // border: 1px solid #9d8e81;
+
+
+}
+
+#container-main {
+    background-color: #d5e3ff !important;
+    border-radius: 28px;
+
+}
+
+#sidebar-summary {
+    background-color: #fff8f4 !important;
+    width: 280px;
+    overflow: hidden;
+    border-left: 1px solid #9d8e81;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.crop-image {
+    object-fit: cover;
+    object-position: center;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+#text-remove {
+    color: #56633c !important;
+}
+
+.text-remove {
+    cursor: pointer;
+    /* Add your desired styling for the clickable element */
+}
+
+.text-remove:hover {
+    /* Add your desired styling for the hover state */
+    /* For example, change the background color or add an underline */
+    background-color: lightgray;
+    text-decoration: underline;
+}
+
+#list-heading, #text-items, #list-bottom {
+    color: #875200 !important;
+}
+
+

@@ -1,0 +1,58 @@
+
+
+
+
+#container-profile, #container-order-history {
+    background-color: #d5e3ff !important;
+    border-radius: 28px;
+
+}
+
+#container-order-history {
+    display: none;
+}
+
+#profile-badge-text {
+    color: #001c3b !important;
+}
+
+.form-label {
+
+}
+
+.accordion-item {
+    border-radius: 20px !important; /* Adjust the value as per your preference */
+    overflow: hidden; /* Ensures the border radius is applied correctly */
+}
+
+.accordion-button[aria-expanded="true"] {
+    color: white;
+}
+
+
+
+#collapseOne {
+    background-color: #fff8f4 !important;
+}
+
+#album-categories .container .row .col .row. col .form-control {
+    border-radius: 20px !important;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+hr {
+    background-color: #ffffff !important;
+}
+
+#container-info {
+    background-color: #fff8f4 !important;
+    border-radius: 20px !important;
+
+}
+
+#text-account-info, #text-shipping {
+    color: #875200 !important
+}

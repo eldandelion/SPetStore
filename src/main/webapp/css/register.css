@@ -1,0 +1,61 @@
+.container {
+    max-width: 960px;
+}
+
+html,
+body {
+    height: 100%;
+    padding-top: 60px;
+}
+
+#button-cart {
+    background-color: #ffffff;
+    --bs-btn-hover-bg: #ffb865 !important;
+    --bs-btn-hover-border-color: #ffb865 !important;
+}
+
+#button-cart:hover {
+    background-color: #ffb865;
+}
+
+#container-form {
+    background-color: #fff8f4 !important;
+    border-radius: 42px;
+    border: 1px solid #9d8e81;
+    margin-bottom: 60px;
+}
+
+#buttonSubmit {
+    background: linear-gradient(to right, #ffb865, #ff9e26) !important;
+    //--bs-btn-bg:  #ffb865;
+    --bs-btn-border-color:  #ffb865;
+    //--bs-btn-hover-bg: #ffe1cb !important;
+    --bs-btn-hover-border-color: #ffe1cb !important;
+
+
+}
+
+#buttonSubmit:hover {
+    background: linear-gradient(to right, #ffe1cb, #ffb865) !important;
+    transition: background 2s ease !important;
+}
+
+#text-header, #text-account-info, #text-profile-info , #text-shipping-info{
+    color: #875200 !important;
+}
+
+#image-captcha {
+    border-radius: 10px;
+}
+
+
+.navbar {
+    border-bottom: 1px solid #9d8e81;
+    background-color: #fff8f4 !important;
+}
+
+
+.form-floating input[type="text"] {
+    margin-bottom: 10px;
+    border-radius: 12px !important;
+}

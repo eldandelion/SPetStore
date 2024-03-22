@@ -1,0 +1,65 @@
+html,
+body {
+    height: 100%;
+    padding-top: 60px;
+}
+
+#button-cart {
+    background-color: #ffffff;
+    --bs-btn-hover-bg: #ffb865 !important;
+    --bs-btn-hover-border-color: #ffb865 !important;
+}
+
+#button-cart:hover {
+    background-color: #ffb865;
+}
+
+
+.navbar {
+    border-bottom: 1px solid #9d8e81;
+    background-color: #fff8f4 !important;
+}
+
+.form-signin {
+    max-width: 330px;
+    padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+    z-index: 2;
+}
+
+#submitButton {
+    border-color: #ffb865;
+    background: linear-gradient(to right, #ffb865, #ff9e26);
+}
+
+#submitButton:hover {
+    background: linear-gradient(to right, #ffe1cb, #ffb865) !important;
+    transition: background 2s ease !important;
+}
+
+.form-signin #form-username {
+    margin-bottom: -1px !important;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-radius: 12px;
+}
+
+#image-captcha {
+    border-radius: 10px;
+}
+
+
+
+
+.form-signin .form-floating input[type="text"] {
+    margin-bottom: 10px;
+    border-radius: 12px !important;
+}
+
+#container-login {
+}
