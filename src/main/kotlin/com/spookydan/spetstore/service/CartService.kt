@@ -1,11 +1,12 @@
 package com.spookydan.spetstore.service
 
-import com.spookydan.spetstore.dao.CartDao
+import com.spookydan.spetstore.mappers.CartMapper
 import com.spookydan.spetstore.model.CartItem
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.util.*
+import java.util.logging.Logger
 
 
 @Service
@@ -13,7 +14,7 @@ class CartService {
 
 
     @Autowired
-    private lateinit var cartDao: CartDao
+    private lateinit var cartMapper: CartMapper
 
     val itemList: List<CartItem>
         get() = _itemList
@@ -27,7 +28,7 @@ class CartService {
         //getting list from the database
         val accountList = mutableListOf<CartItem>()
             .apply {
-                this.addAll(cartDao.getCartItemListBy(userId))
+                this.addAll(cartMapper.getCartItemListBy(userId))
             }
 
         //if there are items with the same id, the quantity will be incremented
@@ -35,20 +36,21 @@ class CartService {
 
         //TODO fix the bug that causes duplicates
         if (_itemList.size > 0) {
-            _itemList.forEach { i ->
+            val iterator = _itemList.iterator()
+            while (iterator.hasNext()) {
+                val i = iterator.next()
                 accountList.forEach { j ->
                     if (i.item.itemId == j.item.itemId) {
                         incrementQuantity(userId, i.item.itemId)
-                        _itemList.remove(i)
+                        iterator.remove()
                     }
                 }
-
             }
             insert(_itemList, userId)
         }
         //if after that there are still items present in the first list,
         //they will be added to the second and put into _itemList
-        val newCart = cartDao.getCartItemListBy(userId)
+        val newCart = cartMapper.getCartItemListBy(userId)
         _itemList.clear()
         _itemList.addAll(newCart)
         return itemList
@@ -57,21 +59,21 @@ class CartService {
     fun insert(item: CartItem, userId: String? = this.userId) {
         _itemList.add(item)
         userId?.let { userId ->
-            cartDao.insertCartItem(item, userId)
+            cartMapper.insertCartItem(item, userId)
         }
     }
 
     private fun insert(list: List<CartItem>, userId: String? = this.userId) {
         userId?.let { userId ->
             list.forEach {
-                cartDao.insertCartItem(it, userId)
+                cartMapper.insertCartItem(it, userId)
             }
         }
     }
 
     fun incrementQuantity(itemId: String, userId: String? = this.userId) {
         userId?.let {
-            cartDao.incrementQuantity(it, itemId)
+            cartMapper.incrementQuantity(it, itemId)
         }
         _itemList.forEach {
             if (it.item.itemId == itemId) {
@@ -87,7 +89,7 @@ class CartService {
             if (it.item.itemId == itemId && it.quantity > 0) {
                 it.decrementQuantity()
                 userId?.let { userId ->
-                    cartDao.decrementQuantity(userId, itemId)
+                    cartMapper.decrementQuantity(userId, itemId)
                 }
             }
         }
@@ -103,10 +105,13 @@ class CartService {
         return subTotal
     }
 
+    private val logger = Logger.getLogger("CartService")
     fun clear(userId: String? = this.userId) {
+        logger.info("User id is $userId")
         userId?.let {
             _itemList.forEach {
-                cartDao.removeItemById(userId, it.item.itemId)
+                logger.info(it.item.itemId)
+                cartMapper.removeItemById(userId, it.item.itemId)
             }
             _itemList.clear()
         }
@@ -121,6 +126,9 @@ class CartService {
                 iterator.remove()
             }
         }
-        userId?.let { cartDao.removeItemById(itemId, userId) }
+        userId?.let {
+            cartMapper.removeItemById(userId, itemId)
+
+        }
     }
 }

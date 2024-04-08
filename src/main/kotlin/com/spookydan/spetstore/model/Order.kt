@@ -1,7 +1,6 @@
 package com.spookydan.spetstore.model
 
-import com.spookydan.spetstore.dao.impl.CartDaoImpl
-import com.spookydan.spetstore.service.CartService
+import org.apache.ibatis.annotations.Param
 import java.io.Serializable
 import java.math.BigDecimal
 import java.util.*

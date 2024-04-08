@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spookydan.spetstore.mappers.CartMapper">
+    <insert id="insertCartItem" parameterType="com.spookydan.spetstore.model.CartItem">
+        INSERT INTO cart (itemid, quantity, userid) VALUES (#{cartItem.item.itemId}, #{cartItem.quantity}, #{userid})
+    </insert>
+
+    <select id="getItem" parameterType="java.lang.String" resultType="com.spookydan.spetstore.model.Item">
+        SELECT I.ITEMID, LISTPRICE, UNITCOST, SUPPLIER AS supplierId, I.PRODUCTID AS productId,
+               NAME AS productName, DESCN AS productDescription, CATEGORY AS categoryId, STATUS,
+               ATTR1 AS attribute1, ATTR2 AS attribute2, ATTR3 AS attribute3, ATTR4 AS attribute4,
+               ATTR5 AS attribute5, QTY AS quantity
+        FROM ITEM I, INVENTORY V, PRODUCT P
+        WHERE P.PRODUCTID = I.PRODUCTID AND I.ITEMID = V.ITEMID AND I.ITEMID = #{itemId}
+    </select>
+
+    <resultMap id="CartItemResultMap" type="com.spookydan.spetstore.model.CartItem">
+        <id property="item.itemId" column="itemid" />
+        <result property="quantity" column="quantity" />
+        <result property="total" column="total" javaType="java.math.BigDecimal" />
+        <association property="item" javaType="com.spookydan.spetstore.model.Item">
+            <id property="itemId" column="itemid" />
+            <result property="productId" column="productid" />
+            <result property="listPrice" column="listprice" />
+            <result property="unitCost" column="unitcost" />
+            <result property="supplierId" column="supplierid" />
+            <result property="status" column="status" />
+            <result property="attribute1" column="attribute1" />
+            <result property="attribute2" column="attribute2" />
+            <!-- Add mappings for other properties in the Item class -->
+            <association property="product" javaType="com.spookydan.spetstore.model.Product">
+                <result property="productId" column="productId" />
+                <result property="categoryId" column="categoryId" />
+                <result property="name" column="productName" />
+                <result property="description" column="productDescription" />
+                <!-- Add mappings for other properties in the Product class -->
+            </association>
+        </association>
+    </resultMap>
+
+    <select id="getCartItemListBy" parameterType="java.lang.String" resultMap="CartItemResultMap">
+        SELECT c.itemid, c.quantity, i.listprice, i.unitcost, i.supplier AS supplierid,
+               i.productid, p.name AS productName, p.descn AS productDescription,
+               p.category AS categoryId, i.status, i.attr1 AS attribute1, i.attr2 AS attribute2, (i.listprice * c.quantity) AS total
+        FROM cart c
+                 LEFT JOIN item i ON c.itemid = i.itemid
+                 LEFT JOIN product p ON i.productid = p.productid
+        WHERE c.userid = #{userid}
+    </select>
+
+
+    <update id="incrementQuantity" parameterType="java.util.Map">
+        UPDATE cart
+        SET quantity = quantity + 1
+        WHERE itemid = #{itemId} AND userid = #{userId}
+    </update>
+
+    <update id="decrementQuantity" parameterType="java.util.Map">
+        UPDATE cart
+        SET quantity = quantity - 1
+        WHERE itemid = #{itemId} AND userid = #{userId}
+    </update>
+
+    <delete id="removeItemById" parameterType="java.lang.String">
+        DELETE FROM cart
+        WHERE itemid = #{itemId} AND userid = #{userId}
+    </delete>
+
+    <update id="updateQuantity" parameterType="java.util.Map">
+        UPDATE cart
+        SET quantity = #{quantity}
+        WHERE itemid = #{item.itemId} AND userid = #{userId}
+    </update>
+
+    <delete id="removeAllCartItemsByUserid" parameterType="java.lang.String">
+        DELETE FROM cart
+        WHERE userid = #{userid}
+    </delete>
+</mapper>

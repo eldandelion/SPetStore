@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spookydan.spetstore.mappers.LineItemMapper">
+
+    <select id="getLineItemsByOrderId" parameterType="int" resultMap="lineItemResultMap">
+        SELECT li.orderid, li.linenum, li.itemid, li.unitprice, li.quantity,
+               i.itemid, i.productid, i.listprice, i.unitcost, i.supplier, i.status, i.attr1, i.attr2,
+               p.productid, p.descn, p.category,(i.listprice * li.quantity) AS total
+        FROM LINEITEM li
+                 LEFT JOIN item i ON li.itemid = i.itemid
+                 LEFT JOIN product p ON i.productid = p.productid
+        WHERE li.ORDERID = #{orderId}
+
+    </select>
+
+    <resultMap id="lineItemResultMap" type="com.spookydan.spetstore.model.LineItem">
+        <result property="orderId" column="orderid"/>
+        <result property="lineNumber" column="linenum"/>
+        <result property="quantity" column="quantity"/>
+        <result property="total" column="total" javaType="java.math.BigDecimal" />
+        <result property="itemId" column="itemid"/>
+        <result property="unitPrice" column="unitprice"/>
+        <association property="item" javaType="com.spookydan.spetstore.model.Item">
+            <id property="itemId" column="itemid" />
+            <result property="productId" column="productid" />
+            <result property="listPrice" column="listprice" />
+            <result property="unitCost" column="unitcost" />
+            <result property="supplierId" column="supplierid" />
+            <result property="status" column="status" />
+            <result property="attribute1" column="attr1" />
+            <result property="attribute2" column="attr2" />
+            <!-- Add mappings for other properties in the Item class -->
+            <association property="product" javaType="com.spookydan.spetstore.model.Product">
+                <result property="productId" column="productId" />
+                <result property="categoryId" column="categoryId" />
+                <result property="name" column="productName" />
+                <result property="description" column="productDescription" />
+                <!-- Add mappings for other properties in the Product class -->
+            </association>
+        </association>
+    </resultMap>
+
+    <insert id="insertLineItems" parameterType="java.util.List">
+
+        INSERT INTO LINEITEM (ORDERID, LINENUM, ITEMID, QUANTITY, UNITPRICE)
+        VALUES
+        <foreach collection="list" item="lineItem" separator=",">
+            (#{lineItem.orderId}, #{lineItem.lineNumber}, #{lineItem.itemId}, #{lineItem.quantity},
+            #{lineItem.unitPrice})
+        </foreach>
+
+    </insert>
+
+</mapper>

@@ -14,9 +14,6 @@ data class CartItem(
 
     constructor() : this(Item(), 0, false, null)
 
-    init {
-        calculateTotal()
-    }
 
     fun incrementQuantity() {
         quantity++

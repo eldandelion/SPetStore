@@ -21,7 +21,16 @@ import java.util.logging.Logger
 
 
 @Controller
-class MainController {
+class MainController(
+    @Autowired
+    private val catalogService: CatalogService,
+    @Autowired
+    private val accountService: AccountService,
+    @Autowired
+    private val cartService: CartService,
+    @Autowired
+    private val orderService: OrderService
+) {
     @GetMapping("/home")
     fun getHome(model: Model): String {
         model.addAttribute("account", null)
@@ -29,17 +38,7 @@ class MainController {
     }
 
 
-    @Autowired
-    private lateinit var catalogService: CatalogService
 
-    @Autowired
-    private lateinit var accountService: AccountService
-
-    @Autowired
-    private lateinit var cartService: CartService
-
-    @Autowired
-    private lateinit var orderService: OrderService
 
     companion object {
 
@@ -140,6 +139,8 @@ class MainController {
         model.addAttribute("productList", productList)
         model.addAttribute("itemList", itemList)
 
+        model.addAttribute("loginAccount", account)
+
         return "store"
     }
 
@@ -227,6 +228,7 @@ class MainController {
         model: Model
     ): ResponseEntity<String> {
         val captcha = model.getAttribute(Captcha.NAME) as Captcha?
+
 //        if (!captcha?.isCorrect(answer)!!) {
 //            val msg = "WRONG_CAPTCHA"
 //            val json = "{\"message\": \"$msg\"}"
@@ -404,10 +406,13 @@ class MainController {
         return flush("null", HttpStatus.OK)
     }
 
-    @PostMapping("/invalidate")
-    fun invalidateProfile(model: Model): ResponseEntity<String> {
+    @GetMapping("/profile/invalidate")
+    fun invalidateProfile(): ResponseEntity<String> {
+        account = null
+        logger.info("reached")
 
-        model.addAttribute("loginAccount", null)
+
+
         val path = "/login"
         val json = "{\"redirect\": \"$path\"}"
         return flush(json, HttpStatus.OK)

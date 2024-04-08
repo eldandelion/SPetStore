@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spookydan.spetstore.mappers.ItemMapper">
+
+    <update id="updateInventoryQuantity" parameterType="java.util.Map">
+        UPDATE INVENTORY
+        SET QTY = QTY - #{increment}
+        WHERE ITEMID = #{itemId}
+    </update>
+
+    <select id="getInventoryQuantity" parameterType="java.lang.String" resultType="int">
+        SELECT QTY AS quantity
+        FROM INVENTORY
+        WHERE ITEMID = #{itemId}
+    </select>
+
+    <select id="getItemListByProduct" parameterType="java.lang.String" resultMap="itemWithProductResultMap">
+        SELECT I.ITEMID, LISTPRICE, UNITCOST, SUPPLIER AS supplierId, I.PRODUCTID AS productId,
+               NAME AS productName, DESCN AS productDescription, CATEGORY AS categoryId, STATUS,
+               ATTR1, ATTR2
+        FROM ITEM I, PRODUCT P
+        WHERE P.PRODUCTID = I.PRODUCTID
+          AND I.PRODUCTID = #{productId}
+    </select>
+
+
+
+    <select id="getItem" parameterType="java.lang.String" resultType="com.spookydan.spetstore.model.Item" resultMap="itemWithProductResultMap">
+        SELECT I.ITEMID, LISTPRICE, UNITCOST, SUPPLIER AS supplierId, I.PRODUCTID AS productId,
+               NAME AS productName, DESCN AS productDescription, CATEGORY AS categoryId, STATUS,
+               ATTR1, ATTR2, QTY AS quantity
+        FROM ITEM I, INVENTORY V, PRODUCT P
+        WHERE P.PRODUCTID = I.PRODUCTID
+          AND I.ITEMID = V.ITEMID
+          AND I.ITEMID = #{itemId}
+    </select>
+
+    <resultMap id="itemWithProductResultMap" type="com.spookydan.spetstore.model.Item">
+        <id property="itemId" column="ITEMID" />
+        <result property="productId" column="PRODUCTID" />
+        <result property="listPrice" column="LISTPRICE" />
+        <result property="unitCost" column="UNITCOST" />
+        <result property="supplierId" column="supplierId" />
+        <result property="status" column="STATUS" />
+        <result property="attribute1" column="ATTR1" />
+        <result property="attribute2" column="ATTR2" />
+        <result property="quantity" column="QUANTITY" />
+
+        <association property="product" javaType="com.spookydan.spetstore.model.Product">
+            <id property="productId" column="productId" />
+            <result property="categoryId" column="categoryId" />
+            <result property="name" column="productName" />
+            <result property="description" column="productDescription" />
+        </association>
+    </resultMap>
+
+</mapper>

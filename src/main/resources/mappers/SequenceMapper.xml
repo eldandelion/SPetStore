@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spookydan.spetstore.mappers.SequenceMapper">
+
+    <select id="getSequence" parameterType="com.spookydan.spetstore.model.Sequence" resultType="com.spookydan.spetstore.model.Sequence">
+        SELECT NAME, NEXTID FROM SEQUENCE WHERE NAME = #{name}
+    </select>
+
+    <update id="updateSequence" parameterType="com.spookydan.spetstore.model.Sequence">
+        UPDATE SEQUENCE SET NEXTID = #{nextId} WHERE NAME = #{name}
+    </update>
+
+</mapper>

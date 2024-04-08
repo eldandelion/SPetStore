@@ -1,7 +1,6 @@
 package com.spookydan.spetstore.service
 
-import com.spookydan.spetstore.dao.AccountDao
-import com.spookydan.spetstore.dao.impl.AccountDaoImpl
+import com.spookydan.spetstore.mappers.AccountMapper
 import com.spookydan.spetstore.model.Account
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service
 class AccountService(
     @Autowired
     @Qualifier("accountDao")
-    private val accountDao: AccountDao
+    private val accountMapper: AccountMapper
 ) {
 
 
@@ -22,12 +21,12 @@ class AccountService(
             this.username = username
             this.password = password
         }
-        return accountDao.getAccountByUsernameAndPassword(account)
+        return accountMapper.getAccountByUsernameAndPassword(account)
     }
 
 
     fun insertAccount(account: Account) {
-        accountDao.apply {
+        accountMapper.apply {
             insertAccount(account)
             insertProfile(account)
             insertSignon(account)
@@ -35,7 +34,7 @@ class AccountService(
     }
 
     fun updateAccount(account: Account) {
-        accountDao.apply {
+        accountMapper.apply {
             updateAccount(account)
             updateProfile(account)
             if (account.password.isNotEmpty()) {
@@ -45,7 +44,7 @@ class AccountService(
     }
 
     fun getAccountByUsername(username: String): Account? {
-        return accountDao.getAccountByUsername(username)
+        return accountMapper.getAccountByUsername(username)
     }
 
 }

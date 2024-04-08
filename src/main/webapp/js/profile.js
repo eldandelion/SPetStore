@@ -8,13 +8,11 @@ btnLogout.addEventListener('click', () => {
 function logOut() {
 
     $.ajax({
-        url: "/JPetStore_war/profile",
-        type: "POST",
-        data: {operation: "invalidate"},
+        url: "/profile/invalidate",
+        type: "GET",
         dataType: "json",
 
         success: function (response) {
-            console.info('data received')
             window.location.href = response.redirect;
 
         },
